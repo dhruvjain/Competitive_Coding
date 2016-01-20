@@ -1,0 +1,104 @@
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <limits>
+#include <string>
+#include <cassert>
+
+using namespace std;
+typedef long long LL;
+typedef pair<int,int> pii;
+typedef vector<int> vi;
+typedef pair<int,pii> edge;
+
+#define forup(i,a,b) for(int i=a; i<b; ++i)
+#define fordn(i,a,b) for(int i=a; i>b; --i)
+#define rep(i,a) for(int i=0; i<a; ++i)
+
+#define dforup(i,a,b) for(i=a; i<b; ++i)
+#define dfordn(i,a,b) for(i=a; i>b; --i)
+#define drep(i,a) for(i=0; i<a; ++i)
+
+#define slenn(s,n) for(n=0; s[n]!=13 and s[n]!=0; ++n);s[n]=0
+
+#define gi(x) scanf("%d",&x) // get int
+#define gl(x) cin>>x // get long 
+#define gd(x) scanf("%lf",&x) // scan double
+#define gs(x) scanf("%s",x) // scan string
+
+#define pis(x) printf("%d ",x) 
+#define pin(x) printf("%d\n",x)
+#define pls(x) cout<<x<<" "
+#define pln(x) cout<<x<<"\n"
+#define pds(x) printf("%.12f ",x)
+#define pdn(x) printf("%.12f\n",x)
+#define pnl() printf("\n")
+
+#define sz size
+#define fi first
+#define sc second
+
+#define ed first
+#define eu second.first
+#define ev second.second
+
+#define pb push_back
+#define mp make_pair
+#define all(v) v.begin(),v.end()
+
+const int inv=1000000000;
+const int minv=-inv;
+
+int getithbit(int n,int i){
+	rep(j,i){
+		n = n>>1;
+	}
+	return n&1;
+}
+
+int main(){
+	int t,n = 0;
+	gi(t);
+	while(t--){
+		vi index;
+		string in;
+		gi(n);
+		rep(i,n){
+			
+			cin>>in;
+			bitset<6> bs1(0),bs2(0);
+			rep(j,6){
+				
+				bitset<6> bs(in[j]);
+				bs1[j] = bs[j];
+				bs2[j] = bs[(j+3)%6];
+			}
+		
+			index.pb(bs1.to_ulong());
+			index.pb(bs2.to_ulong());
+		}
+		cin>>in;
+		int len = 2*n;
+		rep(i,len){
+			printf("%c",in[index[i]]);
+		}
+		printf("\n");
+	}
+
+}

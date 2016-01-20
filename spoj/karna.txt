@@ -1,0 +1,8 @@
+Solve 200 most solved problems on SPOJ, Problem by problem. In 2 months.
+(This will teach all standard problems, algorithms and implementation skills)
+
+Solve problems from CodeChef and CodeForces for 2 months.
+(This will teach variations, we can read others solutions and learn better ways. Skip easy problems)
+
+Solve problems from TopCoder for 2 months.
+(This will teach  Dynamic Programming. Div 1 500p)
