@@ -13,7 +13,6 @@ using namespace std;
 #define vii vector<ii>
 #define vvii vector<vii>
 
-
 bool visited[2005];
 int color[2005];
 
