@@ -43,49 +43,44 @@ typedef pair<int,pii> edge;
 #define mp make_pair
 #define all(v) v.begin(),v.end()
 
+int dp[50][50];
+int pos[50];
 int main(){
 
-	while(1){
-		int n1,n2;
-		cin>>n1;
+	int t;
+	cin>>t;
+	while(t--){
+		int n,k,num;
+		cin>>n>>k;
+		memset(dp,0,sizeof(dp));
+		memset(pos,0,sizeof(pos));
+		rep(i,k){
+			cin>>num;
+			pos[num]=1;
+		}
+		for(int i=1;i<=2*n;i++)
+			for(int j=0;j<=i;j++){
+				if(i==1 && j==1)
+					dp[i][j]=1;
+				if(i>1){
+					if(!pos[i]){
+						if(j==0)
+							dp[i][j] = dp[i-1][j+1];
+						else
+							dp[i][j] = dp[i-1][j-1] + dp[i-1][j+1];
+					}
+					else{
+						if(j==0)
+							dp[i][j] = 0;
+						else
+							dp[i][j] = dp[i-1][j-1];
+					}
+
+				}
+
+			}
 		
-		if(n1==0)
-			break;
-		int arr1[n1];
-
-		rep(i,n1)
-			cin>>arr1[i];
-		cin>>n2;
-		int arr2[n2];
-		rep(i,n2)
-			cin>>arr2[i];
-
-		int l=0,m=0,s1=arr1[0],s2=arr2[0],ans=0;
-		while(l<n1 && m<n2){
-
-			if(arr1[l]<arr2[m])
-				l++, s1 += (l<n1?arr1[l]:0);
-			else if(arr1[l]>arr2[m])
-				m++, s2+= (m<n2?arr2[m]:0);
-			else
-				ans = s1>s2?s1:s2 , s1=s2=ans, l++,m++, s1 += (l<n1?arr1[l]:0), s2+= (m<n2?arr2[m]:0);  
-
-		}
-		ans = s1>s2?s1:s2;
-		l++;m++;
-		while(l<n1){
-			s1+=arr1[l];
-			if(s1>ans)
-				ans=s1;
-			l++;
-		}
-		while(m<n2){
-			s2+=arr2[m];
-			if(s2>ans)
-				ans=s2;
-			m++;
-		}
-		cout<<ans<<endl;
-
+		cout<<dp[2*n][0]<<endl;
 	}
+
 }

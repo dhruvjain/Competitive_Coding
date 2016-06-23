@@ -42,50 +42,35 @@ typedef pair<int,pii> edge;
 #define pb push_back
 #define mp make_pair
 #define all(v) v.begin(),v.end()
+#define MAX_MOD 1000000007
+
 
 int main(){
+	int t;
+	cin>>t;
 
-	while(1){
-		int n1,n2;
-		cin>>n1;
-		
-		if(n1==0)
-			break;
-		int arr1[n1];
+	while(t--){
+		string str;
+		cin>>str;
+		unsigned characters[100] = {0};
+		int len,last_occur;
+		len = str.size();
+		int dp[len+1];
+		memset(dp,0,sizeof(dp));
+		dp[0] = 1;
+		for(int i=1;i<=len;i++){
+			last_occur = characters[str[i-1]];
 
-		rep(i,n1)
-			cin>>arr1[i];
-		cin>>n2;
-		int arr2[n2];
-		rep(i,n2)
-			cin>>arr2[i];
+			dp[i] = dp[i-1]<<1;
 
-		int l=0,m=0,s1=arr1[0],s2=arr2[0],ans=0;
-		while(l<n1 && m<n2){
+			if(last_occur)
+				dp[i]-= dp[last_occur-1];
 
-			if(arr1[l]<arr2[m])
-				l++, s1 += (l<n1?arr1[l]:0);
-			else if(arr1[l]>arr2[m])
-				m++, s2+= (m<n2?arr2[m]:0);
-			else
-				ans = s1>s2?s1:s2 , s1=s2=ans, l++,m++, s1 += (l<n1?arr1[l]:0), s2+= (m<n2?arr2[m]:0);  
+			characters[str[i-1]] = i;
 
+			dp[i]-= dp[i]>MAX_MOD ? MAX_MOD:0;
+			dp[i] += dp[i]<0 ? MAX_MOD:0;
 		}
-		ans = s1>s2?s1:s2;
-		l++;m++;
-		while(l<n1){
-			s1+=arr1[l];
-			if(s1>ans)
-				ans=s1;
-			l++;
-		}
-		while(m<n2){
-			s2+=arr2[m];
-			if(s2>ans)
-				ans=s2;
-			m++;
-		}
-		cout<<ans<<endl;
-
+		cout<<dp[len]<<endl;
 	}
 }
